@@ -1,20 +1,114 @@
+
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .popup-container {
+            position: fixed;
+            left: 100px;
+            top: 100px;
+            border: 1px solid #ebebee;
+            padding: 40px 60px;
+            /* display: none;    기본적으로 쿠키에 따라서 표시를 결정해야 하므로 */
+        }
+
+        .popup-container img {
+            width: 100px;
+        }
+
+        .popup-container p {
+            width: 300px;
+        }
+
+        .popup-container.hide {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="popup-container">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam id aspernatur dicta vel, qui expedita, temporibus adipisci iure impedit labore a blanditiis quasi accusantium reiciendis. Nesciunt voluptatibus magni vero ipsam.
-        <button id="popup-close-btn">닫기</button>
+    <button class="delCookie">쿠키 삭제</button>
+
+    <div class='popup-container'>
+        <img src="images/cookie.png">
+        <h3>Cookie Policy</h3>
+        <p>이 사이트는 귀하의 웹 사이트에 쿠키를 저장하고 당사의 쿠키 정책에 따라 정보를 공개할 수 있습니다.<a href="#">자세히 보기</a></p>
+        <button id="acceptBtn">Accept</button>
+        <div>
+            <input type="checkbox" id='popup-check'>
+            <label for="popup">하루 안보기</label>
+            <button class="close" id="closeBtn"> 닫기 </button>
+        </div>
     </div>
+    
+
+    <!-- <script>
+      let today = new Date();
+        today.setDate(today.getDate() + 1);//내일날자 지정
+        //document.cookie = `brand=korea_it;Expires=${today.toUTCString()}`;//toUTCString()만 cookie에 저장됨
+        document.cookie = `brand=korea_it;max-age=10;`;//언제까지 유지
+      console.log(document.cookie);
+    </script> -->
+
 
     <script>
-      console.log(document.cookie);
       document.cookie = 'brand=korea_it;'
+      console.log(document.cookie);
+
+      document.addEventListener('DOMContentLoaded',()=>{
+        //setCookie('brand','korea',30);
+        //brand명이 있거나 오늘 하루 안보기가 있는 경우 팝업 띄우지 않기
+        const myCookie = document.cookie;
+        console.log(myCookie);
+
+        const cookiesAry = myCookie.split(';');
+        cookiesAry.forEach(data=>{
+          if(data.includes('brand')  || data.includes('oneday')){
+            document.querySelector('.popup-container').classList.add('hide');
+          }
+          
+          
+        });
+      })
+
+      function setCookie(name,value,date){
+        let today = new Date();
+        today.setDate(today.getDate() + date);
+        document.cookie = `${name}=${value};Expires=${today.toUTCString()}`;
+      }
     </script>
+    <!-- 
+      쿠키
+      name=value
+      domain = google.com
+      path = 현재폴더
+      max-age = 사용할수 있는 기간
+     -->
+
+     <script>
+      const closeBtn = document.querySelector('#closeBtn');
+      closeBtn.addEventListener('click',()=>{
+        //오늘하루만 보기 체크
+        const popupCheck = document.querySelector('#popup-check');
+        if(popupCheck.checked){
+          setCookie('oneday','done',1);
+        }else{
+          setCookie('oneday','done',-1);
+        }
+        document.querySelector('.popup-container').classList.add('hide');
+      })
+     </script>
+     <script>
+      const acceptBtn = document.querySelector('#acceptBtn');
+      closeBtn.addEventListener('click',()=>{
+        setCookie('accept','done',365)
+        document.querySelector('.popup-container').classList.add('hide');
+      })
+     </script>
 </body>
 </html>
