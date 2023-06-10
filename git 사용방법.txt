@@ -1,0 +1,33 @@
+$ git init
+git 관ㄹㅣ하는 숨은 파일 보임
+
+
+$ git add .  ($ git add index.js)
+현재파일 모든것
+
+
+.gitignore파일 만들고 안에 배제할 폴더를 쓴다
+
+$ git commit -m "first cookies"
+설명
+
+
+$ git log
+commit 된 정보를 확인
+-----------------
+내컴퓨터에서만 형상관리
+
+
+//git-hub,git-lab,git-butkit : remote computer
+//폴더 : 브랜치 ,리파지토리
+
+$ git config --global user.name "ungdeo"
+$ git config --global user.email "@naver.com"
+$ git push -u origin master
+
+
+git config --list : 환경설정확인
+
+ESC > :qw: 여러페이지 문서 편집기
+
+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
