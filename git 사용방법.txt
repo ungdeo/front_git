@@ -23,6 +23,8 @@ commit 된 정보를 확인
 
 $ git config --global user.name "ungdeo"
 $ git config --global user.email "@naver.com"
+$git branch -M "master"
+$git remote add origin https://....git  ( $git remote remove origin 원래 연결하던것을 절단)
 $ git push -u origin master
 
 
@@ -31,3 +33,12 @@ git config --list : 환경설정확인
 ESC > :qw: 여러페이지 문서 편집기
 
 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
+
+토큰 발급 
+팝업창이 뜨고 토근을 입력하면됨
+
+git config --global --add safe.directory 작업 디렉토리 경로 입력
+
+git add.
+git commit "설명"
+git push .
